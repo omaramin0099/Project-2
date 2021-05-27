@@ -1,0 +1,18 @@
+body{
+    background-color: #034f84;
+}
+.card{
+    background-color: #222;
+}
+.card-body{
+    background-color: #80ced6;
+}
+.none{
+    display: none;
+}
+.btn-danger{
+    padding: 3px;
+}
+h1{
+    color: #d5f4e6;
+}

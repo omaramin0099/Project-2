@@ -1,41 +1,64 @@
-let btn = document.getElementById('Add');
-let mainDiv=document.getElementById('MainDiv');
-let noTask = document.getElementById('NoTask');
-let input = document.getElementById('input');
-let clear = document.getElementById('clear');
+let tasks = document.getElementById("tasks");
+let inputTask = document.getElementById("inputTask");
+let noTasks = document.getElementById("noTasks");
+let addBtn = document.getElementById("addBtn");
+let clear = document.getElementById("clear")
+let show = document.getElementById("show");
+let modal = document.getElementById('modal');
+let close = document.getElementById("close");
 
-var x=0;
-let empty = ()=>{
-    if(mainDiv.childElementCount == 0){
-        noTask.classList.remove('none');
+let modal_toggle= ()=>{
+    modal.classList.toggle('show')
+}
+show.addEventListener('click',modal_toggle);
+close.addEventListener('click',modal_toggle);
+x=0;
+let addTask =()=>{
+     if(inputTask.value.length<3||inputTask.value.length>20){
+         alert('Input a valid task!')
+         inputTask.value="";
+     }
+     else{
+
+        noTasks.classList.add("none");
+        tasks.innerHTML+= `<div class="alert alert-primary text-center">${inputTask.value} <button class="delete btn btn-danger float-right" style = "padding:3px" id = "delete">delete</button></div>`   
+        inputTask.value="";
+        x+=1;
+        
+        }
+}
+addBtn.addEventListener( 'click' , addTask);
+inputTask.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   addBtn.click();
+  }
+});
+
+let delete_check = (e)=>{
+   if(e.target.classList.contains('delete')){
+       e.target.parentElement.remove();
+       x-=1;
+       if(x==0){
+            tasks.innerHTML="<div class=\"alert alert-danger text-center\" id=\"noTasks\">No tasks added yet!</div>"
+            noTasks = document.getElementById("noTasks");
+        }
+    }
+    if(e.target.classList.contains("alert-primary")){
+         e.target.classList.toggle("checked");
     }
 }
-var addTask = ()=>{
-    task = input.value;
-    if(task.length==0||task.length<2){
-        alert("Enter a valid task!")
-    }
-    else{
-        noTask.classList.add('none');
-        mainDiv.innerHTML +=`<div class="alert alert-primary">${task}<button class="delete btn btn-danger float-right" id="remove">remove</button></div>`;
-        input.value=" ";
-        x= x+1;
-    }
-    
-}
-btn.addEventListener('click',addTask);
+document.addEventListener('click',delete_check);
 
-let Clear = ()=>{
-    mainDiv.innerHTML="";
-    noTask.classList.remove('none');
+let clearF = ()=>{
+    tasks.innerHTML="<div class=\"alert alert-danger text-center\" id=\"noTasks\">No tasks added yet!</div>"
+    noTasks = document.getElementById("noTasks");
+    x=0;
 }
-clear.addEventListener('click', Clear)
+clear.addEventListener('click',clearF);
 
-let removeTask = (e) =>{
-    if(e.target.classList.contains('delete')){
-        e.target.parentElement.remove();
-    }
-    empty();
-
-}
-document.addEventListener('click',removeTask);
+// let check = (e)=>{
+//     if(e.target.classList.contains("alert-primary")){
+//         e.target.classList.toggle("checked");
+//     }
+// }

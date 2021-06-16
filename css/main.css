@@ -1,18 +1,20 @@
 body{
-    background-color: #034f84;
+background-color: #222;
 }
 .card{
-    background-color: #222;
+    background-color: #555;
+    color: white;
 }
-.card-body{
-    background-color: #80ced6;
+h1{
+    color: white;
 }
 .none{
     display: none;
 }
-.btn-danger{
-    padding: 3px;
+.show{
+    display: inline;
 }
-h1{
-    color: #d5f4e6;
+.checked{
+    background: rgb(136, 136, 136);
+    text-decoration: line-through;
 }
